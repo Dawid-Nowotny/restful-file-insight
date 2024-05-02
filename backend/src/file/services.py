@@ -3,6 +3,7 @@ import vt
 
 import tempfile
 import os
+import hashlib
 
 from .constants import MAGIC_NUMBERS
 from .api_key import VT_API_KEY
@@ -34,3 +35,18 @@ async def get_analysis(file):
             return analysis.to_dict()
     except Exception:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Error occurred during analysis")
+    
+def generate_file_hash(file):
+    file_content = file.file.read()
+    file_hash = hashlib.sha256(file_content).hexdigest()
+    return file_hash
+
+def compare_hash(hash1, hash2):
+    return hash1 == hash2
+
+def check_file_extensions(file1, file2):
+    ext1 = os.path.splitext(file1.filename)[1]
+    ext2 = os.path.splitext(file2.filename)[1]
+
+    if ext1 != ext2:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="The files have different extensions.")
