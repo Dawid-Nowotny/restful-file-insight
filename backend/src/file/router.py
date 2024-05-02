@@ -15,3 +15,8 @@ async def check_magic_numbers(file: UploadFile = File(...)):
         media_type="application/json",
         status_code=status.HTTP_200_OK,
     )
+
+@router.post("/scan")
+async def scan_file(file: UploadFile = File(...)):
+    result = await get_analysis(file)
+    return result
