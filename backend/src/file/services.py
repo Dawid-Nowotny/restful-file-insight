@@ -20,7 +20,7 @@ async def get_extension(file: UploadFile) -> str:
     
     raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Magic number not found for this file.")
 
-async def get_analysis(file):
+async def get_analysis(file) -> dict:
     try:
         with tempfile.TemporaryDirectory() as tmp_dir:
             tmp_file_path = os.path.join(tmp_dir, file.filename)
@@ -36,15 +36,15 @@ async def get_analysis(file):
     except Exception:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Error occurred during analysis")
     
-def generate_file_hash(file):
+def generate_file_hash(file) -> str:
     file_content = file.file.read()
     file_hash = hashlib.sha256(file_content).hexdigest()
     return file_hash
 
-def compare_hash(hash1, hash2):
+def compare_hash(hash1, hash2) -> bool:
     return hash1 == hash2
 
-def check_file_extensions(file1, file2):
+def check_file_extensions(file1, file2) -> None:
     ext1 = os.path.splitext(file1.filename)[1]
     ext2 = os.path.splitext(file2.filename)[1]
 
