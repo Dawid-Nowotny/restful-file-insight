@@ -1,3 +1,22 @@
 <app-navbar />
-<router-outlet />
+<div class="container">
+    <div class="row">
+      <ul class="nav custom-nav-tabs justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link px-5" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Magic numbers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-5" routerLink="/scan" routerLinkActive="active">Skanuj plik</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-5" routerLink="/compare" routerLinkActive="active">Porównaj pliki</a>
+        </li>
+      </ul>
+        <div class="col-md-12 bg-transparent-dark text-light">
+            <div class="p-3">
+                <router-outlet />
+            </div>
+        </div>
+    </div>
+</div>
 <app-footer />

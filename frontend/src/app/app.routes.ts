@@ -4,7 +4,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 export const routes: Routes = [
     { path: '', component: MainPageComponent },
-    { path: 'main', component: MainPageComponent },
+    { path: 'scan', component: MainPageComponent },
+    { path: 'compare', component: MainPageComponent },
     { path: '**', pathMatch: 'full', 
         component: NotFoundComponent },
   ];
