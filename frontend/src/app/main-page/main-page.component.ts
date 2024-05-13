@@ -8,7 +8,7 @@ import { UploadImageData } from '../models/upload-image-data.model';
 @Component({
   selector: 'app-main-page',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss'
 })
@@ -22,32 +22,31 @@ export class MainPageComponent {
 
   constructor(private formBuilder: FormBuilder, private serverService: ServerService) {
     this.submitted = false;
-        this.submitDisabled = false;
-        this.uploadImageData = new UploadImageData();
-        this.successMessage = '';
-        this.errorMessage = '';
+    this.submitDisabled = false;
+    this.uploadImageData = new UploadImageData();
+    this.successMessage = '';
+    this.errorMessage = '';
+  }
+
+  ngOnInit() {
+    this.creatForm();
   }
 
   creatForm() {
     this.form = this.formBuilder.group({
         image: [null, Validators.required],
-        threshold: [this.uploadImageData.threshold, Validators.required],
     })
-}
+  }
 
-get f() {
-    return this.form.controls;
-}
+  get f() {
+      return this.form.controls;
+  }
 
-uploadImage(event: any) {
-    this.uploadImageData.file = event.target.files[0];
-}
+  uploadImage(event: any) {
+      this.uploadImageData.file = event.target.files[0];
+  }
 
-handleThresholdChange(event: any) {
-    this.uploadImageData.threshold = event.target.value
-}
-
-onSubmit() {
+  onSubmit() {
     this.submitted = true;
     this.successMessage = "";
     this.errorMessage = "";
@@ -60,9 +59,6 @@ onSubmit() {
 
     const formData = new FormData();
     formData.append("file", this.uploadImageData.file);
-    formData.append("uploader_id", this.uploadImageData.uploaderId.toString());
-    formData.append("moderator_id", "");
-    formData.append("threshold", this.uploadImageData.threshold.toString());
 
     this.serverService.uploadImageMagicNumbers(formData).subscribe(
         {
