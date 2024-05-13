@@ -1,4 +1,4 @@
-export class UploadImageData {
+export class UploadFileData {
     file: any;
     constructor() {}
 }

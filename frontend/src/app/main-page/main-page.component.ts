@@ -3,7 +3,7 @@ import { ServerService } from '../server.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Validators, FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UploadImageData } from '../models/upload-image-data.model';
+import { UploadFileData } from '../models/upload-file-data.model';
 
 @Component({
   selector: 'app-main-page',
@@ -13,19 +13,21 @@ import { UploadImageData } from '../models/upload-image-data.model';
   styleUrl: './main-page.component.scss'
 })
 export class MainPageComponent {
-  submitted: boolean;
-  submitDisabled: boolean;
+  loading: boolean;
+  fileName: string;
   form: any;
-  uploadImageData: UploadImageData;
-  successMessage: string;
+  uploadFileData: UploadFileData;
+  success: boolean;
   errorMessage: string;
+  response: any;
 
   constructor(private formBuilder: FormBuilder, private serverService: ServerService) {
-    this.submitted = false;
-    this.submitDisabled = false;
-    this.uploadImageData = new UploadImageData();
-    this.successMessage = '';
+    this.loading = false;
+    this.fileName = "";
+    this.uploadFileData = new UploadFileData();
+    this.success = false;
     this.errorMessage = '';
+    this.response = '';
   }
 
   ngOnInit() {
@@ -34,7 +36,7 @@ export class MainPageComponent {
 
   creatForm() {
     this.form = this.formBuilder.group({
-        image: [null, Validators.required],
+        file: [null, Validators.required],
     })
   }
 
@@ -42,30 +44,35 @@ export class MainPageComponent {
       return this.form.controls;
   }
 
-  uploadImage(event: any) {
-      this.uploadImageData.file = event.target.files[0];
+  uploadFile(event: any) {
+      this.uploadFileData.file = event.target.files[0];
   }
 
   onSubmit() {
-    this.submitted = true;
-    this.successMessage = "";
+    if (!this.uploadFileData.file) {
+      this.errorMessage = "Nie wybrano pliku!";
+      this.success = false;
+      return;
+    }
+
+    this.loading = true;
+    this.success = true;
     this.errorMessage = "";
 
     if (this.form.invalid) {
         return
     }
 
-    this.submitDisabled = true;
-
     const formData = new FormData();
-    formData.append("file", this.uploadImageData.file);
+    formData.append("file", this.uploadFileData.file);
+    this.fileName = this.uploadFileData.file.name;
 
-    this.serverService.uploadImageMagicNumbers(formData).subscribe(
+    this.serverService.uploadFileMagicNumbers(formData).subscribe(
         {
             next: (response: any) => {
-                this.successMessage = "Zdjęcie zostało dodane!";
-                this.submitted = false;
-                this.submitDisabled = false;
+                this.response = response;
+                this.success = true;
+                this.loading = false;
             },
             error: (error: HttpErrorResponse) => {
                 if (error.status === 0) {
@@ -73,9 +80,8 @@ export class MainPageComponent {
                 } else {
                     this.errorMessage = error.error.detail;
                 }
-
-                this.submitted = false;
-                this.submitDisabled = false;
+                this.success = false;
+                this.loading = false;
             }
         }
     )

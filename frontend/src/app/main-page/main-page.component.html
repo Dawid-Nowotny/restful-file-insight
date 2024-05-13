@@ -1,14 +1,7 @@
 <div class="row justify-content-center">
-    <div *ngIf="errorMessage" class="alert alert-danger d-flex align-items-center" role="alert">
-        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+    <div *ngIf="errorMessage" class="alert alert-danger align-items-center text-center" role="alert">
         <div>
             {{ errorMessage }}
-        </div>
-    </div>
-    <div *ngIf="successMessage" class="alert alert-success d-flex align-items-center" role="alert">
-        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-        <div>
-            {{ successMessage }}
         </div>
     </div>
     <div class="col-md-4">
@@ -18,15 +11,21 @@
                     type="file"
                     class="custom-form-control"
                     id="UploadingControlInput" 
-                    formControlName="image" 
-                    name="image"
-                    (change)="uploadImage($event)" 
-                    [ngClass]="{ 'is-invalid': submitted && f.image.errors }"
-                    placeholder="Upload Image"
+                    formControlName="file" 
+                    name="file"
+                    (change)="uploadFile($event)" 
+                    [ngClass]="{ 'is-invalid': loading && f.file.errors }"
+                    placeholder="Upload File"
                 >
                 <br>
-                <button type="submit" [disabled]="submitDisabled" class="btn custom-button">Wyślij</button>
+                <button type="submit" [disabled]="loading" *ngIf="!loading || !fileName" class="btn custom-button">Wyślij</button>
+                <div *ngIf="loading">Wysyłanie...<br><br><i class="fas fa-spinner fa-spin fa-2x"></i></div>
             </form>
         </div>    
+    </div>
+    <div *ngIf="success" class="alert align-items-center text-center custom-alert" role="alert">
+        Rozszerzeniem podanego przez Ciebie pliku o nazwie <b> {{ fileName }} </b> jest: 
+        <br>
+        <span style="font-size: 1.3rem"><b>{{ response.extension }}</b></span>
     </div>
 </div>

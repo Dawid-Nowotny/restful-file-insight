@@ -116,3 +116,9 @@
   background-color: rgb(151, 67, 151);
   color: #000;
 }
+
+.custom-alert {
+  background-color: rgb(191, 107, 191) !important;  /* kolor tła */
+  color: #000 !important; /* kolor czcionki */
+  border-color: rgb(191, 107, 191) !important; /* kolor obramowania (jeśli potrzebne) */
+}
