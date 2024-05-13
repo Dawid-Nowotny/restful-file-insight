@@ -118,7 +118,16 @@
 }
 
 .custom-alert {
-  background-color: rgb(191, 107, 191) !important;  /* kolor tła */
-  color: #000 !important; /* kolor czcionki */
-  border-color: rgb(191, 107, 191) !important; /* kolor obramowania (jeśli potrzebne) */
+  background-color: rgb(191, 107, 191) !important;  
+  color: #000 !important; 
+  border-color: rgb(191, 107, 191) !important;
+}
+
+.table {
+  background-color: transparent  !important;
+}
+
+.table > :not(caption) > * > * {
+  background-color: transparent  !important;
+  border-color: #000 !important;
 }

@@ -1,0 +1,74 @@
+<div class="row justify-content-center">
+    <div *ngIf="errorMessage" class="alert alert-danger align-items-center text-center" role="alert">
+        <div>
+            {{ errorMessage }}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="input-group mb-3 justify-content-center">
+            <form (ngSubmit)="onSubmit()" [formGroup]="form" class="text-center">
+                <input 
+                    type="file"
+                    class="custom-form-control"
+                    id="UploadingControlInput" 
+                    formControlName="file" 
+                    name="file"
+                    (change)="uploadFile($event)" 
+                    [ngClass]="{ 'is-invalid': loading && f.file.errors }"
+                    placeholder="Upload File"
+                >
+                <br>
+                <button type="submit" [disabled]="loading" *ngIf="!loading" class="btn custom-button">Wyślij</button>
+                <div *ngIf="loading">Skanowanie...<br><br><i class="fas fa-spinner fa-spin fa-2x"></i></div>
+            </form>
+        </div>    
+    
+        <div *ngIf="success && !loading"  class="alert align-items-center text-center custom-alert" role="alert">
+            <span style="font-size: 1.3rem"><b>WYNIKI SKANOWANIA</b></span>
+            <br>
+            <br>
+            <table class="table">
+            <thead>
+                <tr>
+                <th>Status</th>
+                <th>Ilość</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>Malicious</td>
+                <td>{{ response.attributes.stats.malicious }}</td>
+                </tr>
+                <tr>
+                <td>Suspicious</td>
+                <td>{{ response.attributes.stats.suspicious }}</td>
+                </tr>
+                <tr>
+                <td>Undetected</td>
+                <td>{{ response.attributes.stats.undetected }}</td>
+                </tr>
+                <tr>
+                <td>Harmless</td>
+                <td>{{ response.attributes.stats.harmless }}</td>
+                </tr>
+                <tr>
+                <td>Timeout</td>
+                <td>{{ response.attributes.stats.timeout }}</td>
+                </tr>
+                <tr>
+                <td>Confirmed Timeout</td>
+                <td>{{ response.attributes.stats['confirmed-timeout'] }}</td>
+                </tr>
+                <tr>
+                <td>Failure</td>
+                <td>{{ response.attributes.stats.failure }}</td>
+                </tr>
+                <tr>
+                <td>Type Unsupported</td>
+                <td>{{ response.attributes.stats['type-unsupported'] }}</td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
