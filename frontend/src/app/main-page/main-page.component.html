@@ -1,1 +1,32 @@
-<p>main-page works!</p>
+<div class="row justify-content-center">
+    <div *ngIf="errorMessage" class="alert alert-danger d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+        <div>
+            {{ errorMessage }}
+        </div>
+    </div>
+    <div *ngIf="successMessage" class="alert alert-success d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+        <div>
+            {{ successMessage }}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="input-group mb-3 justify-content-center">
+            <form (ngSubmit)="onSubmit()" [formGroup]="form" class="text-center">
+                <input 
+                    type="file"
+                    class="custom-form-control"
+                    id="UploadingControlInput" 
+                    formControlName="image" 
+                    name="image"
+                    (change)="uploadImage($event)" 
+                    [ngClass]="{ 'is-invalid': submitted && f.image.errors }"
+                    placeholder="Upload Image"
+                >
+                <br>
+                <button type="submit" [disabled]="submitDisabled" class="btn custom-button">Wyślij</button>
+            </form>
+        </div>    
+    </div>
+</div>

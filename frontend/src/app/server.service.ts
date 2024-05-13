@@ -14,5 +14,8 @@ export class ServerService {
     private restUrl = 'http://127.0.0.1:8000';
     constructor(private http: HttpClient) { }
 
-  
+    uploadImageMagicNumbers(file: any): Observable<any> {
+        const url = `${this.restUrl}/file/check-magic-numbers`;
+        return this.http.post(url, file);
+    }
 }
