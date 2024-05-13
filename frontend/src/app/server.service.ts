@@ -23,4 +23,8 @@ export class ServerService {
         const url = `${this.restUrl}/file/scan`;
         return this.http.post(url, file);
     }
+    uploadCompare(file: any): Observable<any> {
+        const url = `${this.restUrl}/file/compare`;
+        return this.http.post(url, file);
+    }
 }

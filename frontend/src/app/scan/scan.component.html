@@ -18,7 +18,7 @@
                     placeholder="Upload File"
                 >
                 <br>
-                <button type="submit" [disabled]="loading" *ngIf="!loading" class="btn custom-button">Wyślij</button>
+                <button type="submit" *ngIf="!loading" class="btn custom-button">Wyślij</button>
                 <div *ngIf="loading">Skanowanie...<br><br><i class="fas fa-spinner fa-spin fa-2x"></i></div>
             </form>
         </div>    
