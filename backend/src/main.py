@@ -17,4 +17,4 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(magic_numbers_router, prefix="/file", tags=["Magic numbers"])
+app.include_router(magic_numbers_router, prefix="/file", tags=["Files"])

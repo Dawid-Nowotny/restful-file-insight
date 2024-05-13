@@ -11,7 +11,7 @@ from .api_key import VT_API_KEY
 client = vt.Client(VT_API_KEY)
 
 async def get_extension(file: UploadFile) -> str:
-    header = await file.read(4)
+    header = await file.read(16)
     hex_signature = header.hex().lower()
     
     for extension, magic_number in MAGIC_NUMBERS.items():
