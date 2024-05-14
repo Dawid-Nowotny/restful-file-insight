@@ -1,0 +1,77 @@
+<div class="row justify-content-center">Wybierz plik, aby go przeskanować! <br><br></div> 
+<div class="row justify-content-center">
+    <div *ngIf="errorMessage" class="alert alert-danger align-items-center text-center" role="alert">
+        <div>
+            {{ errorMessage }}
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="input-group mb-3 justify-content-center">
+            <form (ngSubmit)="onSubmit()" [formGroup]="form" class="text-center">
+                <input 
+                    type="file"
+                    class="custom-form-control"
+                    id="UploadingControlInput" 
+                    formControlName="file" 
+                    name="file"
+                    (change)="uploadFile($event)" 
+                    [ngClass]="{ 'is-invalid': loading && f.file.errors }"
+                    placeholder="Upload File"
+                >
+                <br>
+                <button type="submit" *ngIf="!loading" class="btn custom-button">Skanuj</button>
+                <div *ngIf="loading">Skanowanie...<br><br><i class="fas fa-spinner fa-spin fa-2x"></i></div>
+            </form>
+        </div>    
+    
+        <div *ngIf="success && !loading"  class="alert align-items-center text-center custom-alert" role="alert">
+            <span style="font-size: 1.3rem"><b>WYNIKI SKANOWANIA</b></span>
+            <br>
+            <span>Plik: <b>{{ fileName }}</b></span>
+            <br>
+            <br>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Ilość</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Złośliwe</td>
+                        <td>{{ response.attributes.stats.malicious }}</td>
+                    </tr>
+                    <tr>
+                        <td>Podejrzane</td>
+                        <td>{{ response.attributes.stats.suspicious }}</td>
+                    </tr>
+                    <tr>
+                        <td>Niezidentyfikowane</td>
+                        <td>{{ response.attributes.stats.undetected }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nieszkodliwe</td>
+                        <td>{{ response.attributes.stats.harmless }}</td>
+                    </tr>
+                    <tr>
+                        <td>Przekroczono limit czasu</td>
+                        <td>{{ response.attributes.stats.timeout }}</td>
+                    </tr>
+                    <tr>
+                        <td>Potwierdzono przekroczenie limitu czasu</td>
+                        <td>{{ response.attributes.stats['confirmed-timeout'] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Niepowodzenie</td>
+                        <td>{{ response.attributes.stats.failure }}</td>
+                    </tr>
+                    <tr>
+                        <td>Typ pliku nieobsługiwany</td>
+                        <td>{{ response.attributes.stats['type-unsupported'] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

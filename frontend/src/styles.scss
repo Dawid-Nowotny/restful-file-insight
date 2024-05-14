@@ -1,1 +1,155 @@
-/* You can add global styles to this file, and also import other style files */
+.body {
+    background: rgb(31, 31, 31);
+}
+
+.bg-transparent-dark {
+    background-color: rgba(0, 0, 0, 0.3); 
+}
+
+.logo {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.3); 
+    border-top: 3px solid rgb(191, 107, 191);
+    border-bottom: 3px solid rgb(191, 107, 191);
+    padding: 30px 0; 
+    font-size: 3rem; 
+    letter-spacing: 10px; 
+    text-transform: uppercase; 
+    color: rgb(191, 107, 191);
+    font-weight: 700;
+    margin: 50px 0;
+    text-align: center; 
+  }
+
+
+  @media (max-width: 576px) {
+    .logo {
+      font-size: 2rem; 
+      padding: 20px 0; 
+      margin: 15px 0;
+    }
+  }
+
+  .custom-nav-tabs {
+    text-transform: uppercase; 
+    border-bottom: 3px solid rgb(191, 107, 191); 
+  }
+
+  .custom-nav-tabs .nav-link {
+    color: #fff; 
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+  }
+  .custom-nav-tabs .nav-link.active,
+  .custom-nav-tabs .nav-link:hover {
+    color: #000; 
+    font-weight: 500;
+    background-color: rgb(191, 107, 191);
+    border: 1px solid rgb(191, 107, 191);
+  }
+
+  .footer {
+    font-size: 0.8rem; 
+    color: rgb(191, 107, 191);
+    padding: 30px 0; 
+    text-align: center; 
+  }
+
+.custom-form-control {
+    display: block;
+    width: 100%;
+    padding: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: rgba(0, 0, 0, 0.0);
+    background-clip: padding-box;
+    border: 3px solid rgb(191, 107, 191);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.custom-form-control:hover {
+  border-color: rgb(151, 67, 151);
+}
+
+.custom-form-control::file-selector-button {
+  padding: 6px 17px;
+  margin: 0;
+  margin-right: 20px;
+  margin-inline-end: 0;
+  color: #000;
+  font-weight: 500;
+  text-transform: uppercase; 
+  pointer-events: none;
+  border-color: inherit;
+  border-style: solid;
+  border-width: 0;
+  border-inline-end-width: 0;
+  border-radius: 0; 
+  background-color: rgb(191, 107, 191);
+  transition: background-color .15s ease-in-out;
+}
+
+.custom-form-control:hover:not(:disabled):not([readonly])::file-selector-button {
+  background-color: rgb(151, 67, 151);
+  color: #000;
+}
+
+.custom-form-control::file-selector-text {
+  padding: 17px;
+}
+
+
+.custom-button [type=submit]:not(:disabled), button:not(:disabled) {
+  cursor: pointer;
+  padding: 6px 17px;
+  color: #000;
+  font-weight: 500;
+  text-transform: uppercase; 
+  border-color: inherit;
+  border-style: solid;
+  border-width: 0;
+  border-inline-end-width: 0;
+  border-radius: 0; 
+  background-color: rgb(191, 107, 191);
+  transition: background-color .15s ease-in-out;
+}
+
+.custom-button [type=submit]:not(:disabled):hover, button:not(:disabled):hover {
+  background-color: rgb(151, 67, 151);
+  color: #000;
+}
+
+.custom-alert {
+  background-color: rgba(191, 107, 191, 0.1) !important;  
+  color: #fff !important; 
+  border-color: rgb(191, 107, 191) !important;
+}
+
+.custom-alert2 {
+  background-color: rgba(0, 0, 0, 0.3) !important;  
+  color: #fff !important; 
+  border-color: rgb(191, 107, 191) !important;
+  margin-bottom: 50px  !important;
+}
+
+@media (max-width: 576px) {
+  .custom-alert2 {
+    margin-bottom: 10px  !important;
+  }
+}
+
+.table {
+  background-color: transparent  !important;
+  color: #fff !important;
+}
+
+.table > :not(caption) > * > * {
+  background-color: transparent  !important;
+  border-color: rgb(191, 107, 191) !important;
+  color: #fff !important;
+}
