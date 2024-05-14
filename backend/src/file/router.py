@@ -28,7 +28,7 @@ def compare_files(file1: UploadFile = File(...), file2: UploadFile = File(...)):
 
     if compare_hash(hash1, hash2):
         return Response(
-        content=json.dumps({"message": "The files are identical."}),
+        content=json.dumps({"message": "Pliki są identyczne."}),
         media_type="application/json",
         status_code=status.HTTP_200_OK,
         )
@@ -36,7 +36,7 @@ def compare_files(file1: UploadFile = File(...), file2: UploadFile = File(...)):
     check_file_extensions(file1, file2)
 
     return Response(
-        content=json.dumps({"message": "The files are different."}),
+        content=json.dumps({"message": "Pliki różnią się od siebie"}),
         media_type="application/json",
         status_code=status.HTTP_200_OK,
     )

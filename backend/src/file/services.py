@@ -18,7 +18,7 @@ async def get_extension(file: UploadFile) -> str:
         if hex_signature.startswith(magic_number):
             return extension
     
-    raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Magic number not found for this file.")
+    raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Magiczne numery nie zostały odnalezione dla tego pliku")
 
 async def get_analysis(file) -> dict:
     try:
@@ -34,7 +34,7 @@ async def get_analysis(file) -> dict:
             analysis = await client.get_object_async(f"/analyses/{analysis.id}")
             return analysis.to_dict()
     except Exception:
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Error occurred during analysis")
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Błąd podczas analizy pliku")
     
 def generate_file_hash(file) -> str:
     file_content = file.file.read()
@@ -49,4 +49,4 @@ def check_file_extensions(file1, file2) -> None:
     ext2 = os.path.splitext(file2.filename)[1]
 
     if ext1 != ext2:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="The files have different extensions.")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Pliki mają różne rozszerzenia")
