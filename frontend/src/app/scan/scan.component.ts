@@ -15,6 +15,7 @@ import { UploadFileData } from '../models/upload-file-data.model';
 export class ScanComponent {
   loading: boolean;
   form: any;
+  fileName: string;
   uploadFileData: UploadFileData;
   success: boolean;
   errorMessage: string;
@@ -22,6 +23,7 @@ export class ScanComponent {
 
   constructor(private formBuilder: FormBuilder, private serverService: ServerService) {
     this.loading = false;
+    this.fileName = '';
     this.uploadFileData = new UploadFileData();
     this.success = false;
     this.errorMessage = '';
@@ -63,6 +65,7 @@ export class ScanComponent {
 
     const formData = new FormData();
     formData.append("file", this.uploadFileData.file);
+    this.fileName = this.uploadFileData.file.name;
 
     this.serverService.uploadFileScan(formData).subscribe(
         {

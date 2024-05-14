@@ -1,11 +1,11 @@
+<div *ngIf="errorMessage && !loading" class="alert align-items-center text-center custom-alert" role="alert">
+    <span><b>{{ errorMessage }}</b></span>
+</div>
+<div *ngIf="success && !loading" class="alert align-items-center text-center custom-alert" role="alert">
+    <span><b>{{ response.message }}</b></span>
+</div>
 <div class="row justify-content-center">Wybierz pliki, aby je porównać! <br><br></div> 
 <div class="row justify-content-center">
-    <div *ngIf="errorMessage && !loading" class="alert align-items-center text-center custom-alert" role="alert">
-        <span><b>{{ errorMessage }}</b></span>
-    </div>
-    <div *ngIf="success && !loading" class="alert align-items-center text-center custom-alert" role="alert">
-        <span><b>{{ response.message }}</b></span>
-    </div>
     <div class="col-md-4">
         <div class="input-group mb-3 justify-content-center">
             <form (ngSubmit)="onSubmit()" [formGroup]="form" class="text-center">
