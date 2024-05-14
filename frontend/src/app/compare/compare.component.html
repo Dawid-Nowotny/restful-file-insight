@@ -1,0 +1,39 @@
+<div class="row justify-content-center">Wybierz pliki, aby je porównać! <br><br></div> 
+<div class="row justify-content-center">
+    <div *ngIf="errorMessage && !loading" class="alert align-items-center text-center custom-alert" role="alert">
+        <span><b>{{ errorMessage }}</b></span>
+    </div>
+    <div *ngIf="success && !loading" class="alert align-items-center text-center custom-alert" role="alert">
+        <span><b>{{ response.message }}</b></span>
+    </div>
+    <div class="col-md-4">
+        <div class="input-group mb-3 justify-content-center">
+            <form (ngSubmit)="onSubmit()" [formGroup]="form" class="text-center">
+                <input 
+                    type="file"
+                    class="custom-form-control"
+                    id="UploadingControlInput" 
+                    formControlName="file" 
+                    name="file"
+                    (change)="uploadFile($event, true)" 
+                    [ngClass]="{ 'is-invalid': loading && f.file.errors }"
+                    placeholder="Upload File"
+                >
+                <br>
+                <input 
+                    type="file"
+                    class="custom-form-control"
+                    id="UploadingControlInput" 
+                    formControlName="file2" 
+                    name="file2"
+                    (change)="uploadFile($event, false)" 
+                    [ngClass]="{ 'is-invalid': loading && f.file2.errors }"
+                    placeholder="Upload File 2"
+                >
+                <br>
+                <button type="submit" [disabled]="loading" *ngIf="!loading" class="btn custom-button">Porównaj</button>
+                <div *ngIf="loading">Wysyłanie...<br><br><i class="fas fa-spinner fa-spin fa-2x"></i></div>
+            </form>
+        </div>    
+    </div>
+</div>
