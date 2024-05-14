@@ -36,15 +36,15 @@ async def get_analysis(file) -> dict:
     except Exception:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Błąd podczas analizy pliku")
     
-def generate_file_hash(file) -> str:
+def generate_file_hash(file: UploadFile) -> str:
     file_content = file.file.read()
     file_hash = hashlib.sha256(file_content).hexdigest()
     return file_hash
 
-def compare_hash(hash1, hash2) -> bool:
+def compare_hash(hash1: str, hash2: str) -> bool:
     return hash1 == hash2
 
-def check_file_extensions(file1, file2) -> None:
+def check_file_extensions(file1: UploadFile, file2: UploadFile) -> None:
     ext1 = os.path.splitext(file1.filename)[1]
     ext2 = os.path.splitext(file2.filename)[1]
 
